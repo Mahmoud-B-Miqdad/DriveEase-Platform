@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from .models import User, CarCategory, Car
 from django.contrib import messages
 from .models import User
 import bcrypt
@@ -7,7 +9,7 @@ def index(request):
     """Renders the main authentication page containing both Login and Registration forms."""
     # If user is already logged in, redirect them straight to the dashboard
     if 'user_id' in request.session:
-        return redirect('dashboard')
+        return redirect('catalog')
     return render(request, 'auth.html')
 
 def register(request):
@@ -43,17 +45,45 @@ def login(request):
                 request.session['user_id'] = user.id
                 request.session['username'] = user.username
                 request.session['role'] = user.role
-                return redirect('dashboard')
+                return redirect('catalog')
         
         messages.error(request, "Invalid email or password credentials.")
     return redirect('auth_index')
 
-def dashboard(request):
-    """Route Protection: Prevents unauthenticated users from accessing the platform."""
+def catalog(request):
+    """Route Protection: Renders the premium car catalog with initial categories."""
     if 'user_id' not in request.session:
         messages.error(request, "Authentication required. Please sign in first.")
         return redirect('auth_index')
-    return render(request, 'dashboard.html')
+        
+    categories = CarCategory.objects.all()
+    return render(request, 'catalog.html', {'categories': categories})
+
+
+def filter_cars(request):
+    """AJAX Endpoint: Fetches available cars filtered by category as JSON."""
+    if 'user_id' not in request.session:
+        return JsonResponse({'error': 'Unauthorized'}, status=401)
+        
+    category_id = request.GET.get('category_id', None)
+    
+    if category_id == 'all' or not category_id:
+        cars_queryset = Car.objects.get_available_cars()
+    else:
+        cars_queryset = Car.objects.get_available_cars(category_id=category_id)
+        
+    cars_list = []
+    for car in cars_queryset:
+        cars_list.append({
+            'id': car.id,
+            'make': car.make,
+            'model': car.model,
+            'year': car.year,
+            'category': car.car_category.category_name,
+            'rate': str(car.car_category.daily_rate) 
+        })
+        
+    return JsonResponse({'cars': cars_list})
 
 def logout(request):
     """Clears the session completely and logs out the user."""

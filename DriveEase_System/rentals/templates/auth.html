@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveEase — Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'rentals/css/style.css' %}">
+</head>
+<body>
+
+<div class="container-fluid d-flex align-items-center justify-content-center" style="min-height:100vh; padding:2rem">
+    <div class="auth-split">
+
+        <!-- ── Left Panel ── -->
+        <div class="auth-left">
+            <div>
+                <div class="brand-logo"><i class="fa-solid fa-car-side me-2"></i>Drive<span>Ease</span></div>
+                <div class="brand-tagline">Premium Rentals</div>
+                <div class="feature-list">
+                    <div class="feature-item active">
+                        <div class="feature-icon"><i class="fa-solid fa-gem" style="font-size:11px"></i></div>
+                        <span>Luxury Fleet</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-bolt" style="font-size:11px"></i></div>
+                        <span>Instant Booking</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-headset" style="font-size:11px"></i></div>
+                        <span>24/7 Support</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-earth-americas" style="font-size:11px"></i></div>
+                        <span>Global Access</span>
+                    </div>
+                </div>
+            </div>
+            <div class="auth-left-footer">© 2025 DriveEase · All rights reserved</div>
+        </div>
+
+        <!-- ── Right Panel ── -->
+        <div class="auth-right">
+
+            <!-- Flash Messages -->
+            {% if messages %}
+                <div class="mb-3">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags == 'success' %}alert-custom-success{% else %}alert-custom{% endif %} d-flex align-items-center py-2" role="alert">
+                            <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% else %}fa-triangle-exclamation{% endif %} me-2" style="font-size:13px"></i>
+                            <div>{{ message }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="tab-login">Sign In</div>
+                <div class="auth-tab" id="tab-register">Register</div>
+            </div>
+
+            <!-- ── Login ── -->
+            <div id="login-section">
+                <form action="{% url 'auth_login' %}" method="POST">
+                    {% csrf_token %}
+                    <label class="field-label">Email</label>
+                    <input type="email" name="email" class="form-control custom-input" placeholder="name@example.com" required>
+
+                    <label class="field-label">Password</label>
+                    <input type="password" name="password" class="form-control custom-input" placeholder="••••••••" required>
+
+                    <button type="submit" class="btn-premium">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>Access Dashboard
+                    </button>
+                </form>
+
+                <div class="auth-divider"><span>or continue with</span></div>
+                <div class="social-row">
+                    <div class="btn-social"><i class="fa-brands fa-google me-1"></i>Google</div>
+                    <div class="btn-social"><i class="fa-brands fa-linkedin me-1"></i>LinkedIn</div>
+                </div>
+                <div class="auth-toggle">
+                    No account yet? <a id="go-to-register" class="toggle-link">Create one →</a>
+                </div>
+            </div>
+
+            <!-- ── Register ── -->
+            <div id="register-section" class="d-none">
+                <form action="{% url 'auth_register' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row g-2 mb-0">
+                        <div class="col-6">
+                            <label class="field-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control custom-input" placeholder="Mahmoud" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="field-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control custom-input" placeholder="Miqdad" required>
+                        </div>
+                    </div>
+
+                    <label class="field-label">Username</label>
+                    <input type="text" name="username" class="form-control custom-input" placeholder="mahmoud99" required>
+
+                    <label class="field-label">Email</label>
+                    <input type="email" name="email" class="form-control custom-input" placeholder="mahmoud@example.com" required>
+
+                    <label class="field-label">
+                        Phone <span class="optional">(Optional)</span>
+                    </label>
+                    <input type="text" name="phone" class="form-control custom-input" placeholder="0599000000">
+
+                    <div class="row g-2 mb-0">
+                        <div class="col-6">
+                            <label class="field-label">Password</label>
+                            <input type="password" name="password" class="form-control custom-input" placeholder="••••••••" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="field-label">Confirm</label>
+                            <input type="password" name="confirm_password" class="form-control custom-input" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-premium">
+                        <i class="fa-solid fa-user-plus me-2"></i>Create Account
+                    </button>
+                </form>
+                <div class="auth-toggle">
+                    Already have an account? <a id="go-to-login" class="toggle-link">← Sign in</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const loginSec  = document.getElementById('login-section');
+    const regSec    = document.getElementById('register-section');
+    const tabLogin  = document.getElementById('tab-login');
+    const tabReg    = document.getElementById('tab-register');
+
+    function showLogin() {
+        regSec.classList.add('d-none');
+        loginSec.classList.remove('d-none');
+        tabLogin.classList.add('active');
+        tabReg.classList.remove('active');
+    }
+
+    function showRegister() {
+        loginSec.classList.add('d-none');
+        regSec.classList.remove('d-none');
+        tabReg.classList.add('active');
+        tabLogin.classList.remove('active');
+    }
+
+    document.getElementById('tab-login').addEventListener('click', showLogin);
+    document.getElementById('tab-register').addEventListener('click', showRegister);
+    document.getElementById('go-to-register').addEventListener('click', showRegister);
+    document.getElementById('go-to-login').addEventListener('click', showLogin);
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+/* Custom Styles for DriveEase - Premium Dark & Modern Theme */
+
+:root {
+    --bg-primary: #0a192f;
+    --bg-secondary: #172a45;
+    --text-primary: #f8f9fa;
+    --text-muted: #8892b0;
+    --accent-color: #00b4d8;
+    --accent-hover: #0077b6;
+    --card-border: #30363d;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Auth Card Styling */
+.auth-container {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    padding: 40px;
+    transition: transform 0.3s ease;
+}
+
+.auth-container:hover {
+    transform: translateY(-5px);
+}
+
+.auth-title {
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.auth-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Custom Form Controls */
+.form-label {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.custom-input {
+    background-color: var(--bg-primary) !important;
+    border: 1px solid var(--card-border) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 12px 15px !important;
+}
+
+.custom-input:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.2) !important;
+}
+
+/* Brand Logo Text */
+.brand-logo {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    text-transform: uppercase;
+}
+.brand-logo span {
+    color: #ffffff;
+}
+
+/* Custom Buttons */
+.btn-premium {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-premium:hover {
+    background-color: var(--accent-hover);
+    color: #ffffff;
+}
+
+/* Custom Messages/Alerts */
+.alert-custom {
+    border-radius: 8px;
+    font-size: 0.85rem;
+    background-color: #ff4d4d20;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+}
+
+.alert-custom-success {
+    border-radius: 8px;
+    font-size: 0.85rem;
+    background-color: #2ec4b620;
+    border: 1px solid #2ec4b6;
+    color: #2ec4b6;
+}
+
+/* Toggle Link */
+.toggle-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.toggle-link:hover {
+    text-decoration: underline;
+}

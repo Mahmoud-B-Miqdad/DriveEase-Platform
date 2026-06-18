@@ -119,8 +119,48 @@ def create_booking_action(request, car_id):
         user_id = request.session['user_id']
         booking = Booking.objects.create_booking(request.POST, user_id)
         
-        messages.success(request, f"Booking #{booking.id} created successfully! Please review your invoice below.")
+        messages.warning(request, f"Reservation #{booking.id} is temporarily held as PENDING. Please complete your payment below to secure your vehicle.")
+        return redirect('payment_gate', booking_id=booking.id)
         
+    return redirect('catalog')
+
+def payment_gate(request, booking_id):
+    """Route Protection: Displays the professional invoice and mock credit card form."""
+    if 'user_id' not in request.session:
+        messages.error(request, "Authentication required.")
+        return redirect('auth_index')
+        
+    booking = Booking.objects.filter(id=booking_id, user_id=request.session['user_id']).first()
+    if not booking:
+        messages.error(request, "Reservation record not found.")
+        return redirect('catalog')
+        
+    return render(request, 'payment.html', {'booking': booking})
+
+
+def process_payment_action(request, booking_id):
+    """Executes the financial transaction logic and issues the immutable database Payment invoice."""
+    if request.method == "POST":
+        if 'user_id' not in request.session:
+            return redirect('auth_index')
+            
+        booking = Booking.objects.filter(id=booking_id, user_id=request.session['user_id']).first()
+        if not booking:
+            messages.error(request, "Critical billing error. Transaction halted.")
+            return redirect('catalog')
+            
+        payment_method = request.POST.get('card_type', 'Visa')
+        
+        Payment.objects.process_invoice(
+            booking=booking,
+            payment_method=payment_method,
+            amount_paid=booking.total_fees
+        )
+        
+        messages.success(request, f"Payment received successfully! Your luxury rental is secured.", extra_tags='success')
+        
+        booking.booking_status = 'Confirmed'
+        booking.save()
         return redirect('catalog')
         
     return redirect('catalog')

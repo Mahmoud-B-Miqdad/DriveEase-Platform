@@ -914,6 +914,399 @@ body {
     flex-shrink: 0;
 }
 
+/* Premium Credit Card Mockup */
+.credit-card-box {
+    background: linear-gradient(135deg, #1f4068 0%, #162447 100%);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 16px;
+    padding: 25px;
+    color: white;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.card-chip {
+    width: 45px;
+    height: 35px;
+    background: linear-gradient(135deg, #e0a96d 0%, #96705b 100%);
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.invoice-badge-status {
+    background-color: rgba(46, 196, 182, 0.15);
+    color: #2ec4b6;
+    border: 1px solid rgba(46, 196, 182, 0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ══════════════════════════════
+   PAYMENT / INVOICE PAGE
+══════════════════════════════ */
+
+/* ── Invoice Panel ── */
+.invoice-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+}
+
+.invoice-panel-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.invoice-id-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+}
+
+.badge-awaiting {
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.22);
+    color: var(--gold);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.badge-awaiting-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+}
+
+/* Detail Grid */
+.invoice-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.invoice-detail-block-title {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.invoice-detail-block-val {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.invoice-detail-block-val strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Logistics Box */
+.logistics-box {
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.logistics-box-title {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 14px;
+}
+
+.logistics-box-title i {
+    color: var(--gold);
+    font-size: 0.7rem;
+}
+
+.logistics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.logistics-item-label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+.logistics-item-val {
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.logistics-note {
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    background: rgba(201, 168, 76, 0.05);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 10px;
+}
+
+/* Fees Table */
+.fees-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fees-table thead tr {
+    border-bottom: 1px solid var(--border);
+}
+
+.fees-table th {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 0 12px;
+}
+
+.fees-table th:last-child { text-align: right; }
+
+.fees-table tbody td {
+    padding: 11px 0;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.fees-table tbody td:last-child {
+    text-align: right;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.fees-table tbody tr:last-child td { border-bottom: none; }
+
+.fees-included {
+    color: var(--gold) !important;
+    font-size: 0.72rem !important;
+}
+
+.fees-total-row td {
+    padding-top: 16px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    border-top: 1px solid var(--border) !important;
+    border-bottom: none !important;
+    font-size: 0.9rem !important;
+}
+
+.fees-total-row td:last-child {
+    font-size: 1.4rem !important;
+    color: var(--gold) !important;
+}
+
+/* ── Payment Panel ── */
+.payment-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+    position: sticky;
+    top: 24px;
+}
+
+.payment-panel-title {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.payment-panel-title i { color: var(--gold); font-size: 0.8rem; }
+
+/* Credit Card Mockup */
+.credit-card-box {
+    background: linear-gradient(135deg, #1c1c2e 0%, #16213e 50%, #0f3460 100%);
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 16px;
+    padding: 22px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 22px;
+}
+
+.credit-card-box::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(201, 168, 76, 0.04);
+    border: 1px solid rgba(201, 168, 76, 0.06);
+}
+
+.credit-card-box::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(201, 168, 76, 0.03);
+    border: 1px solid rgba(201, 168, 76, 0.05);
+}
+
+.card-box-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-chip {
+    width: 38px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--gold) 0%, #a07830 100%);
+    border-radius: 5px;
+}
+
+.card-box-brand {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(201, 168, 76, 0.55);
+}
+
+.card-box-number {
+    font-size: 0.95rem;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    margin-bottom: 16px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.card-box-footer {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.card-box-footer-label {
+    font-size: 0.52rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 3px;
+}
+
+.card-box-footer-val {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Input with icon */
+.input-icon-wrap {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.input-icon-wrap .custom-input {
+    padding-left: 38px !important;
+    margin-bottom: 0;
+}
+
+.input-icon-wrap .input-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-hint);
+    font-size: 0.75rem;
+    z-index: 1;
+}
+
+/* Pay Button */
+.btn-authorize-payment {
+    width: 100%;
+    background: var(--gold);
+    color: var(--obsidian);
+    border: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-weight: 800;
+    font-size: 0.82rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-authorize-payment:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+}
+
+.btn-authorize-payment:active { transform: translateY(0); }
+
+/* SSL Note */
+.payment-ssl-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 10px;
+    font-size: 0.62rem;
+    color: var(--text-hint);
+    letter-spacing: 0.3px;
+}
+
 @keyframes spin {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }

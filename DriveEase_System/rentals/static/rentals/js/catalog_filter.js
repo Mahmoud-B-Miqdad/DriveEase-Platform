@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="car-price">
                                 $${car.rate}<span class="price-unit">/day</span>
                             </div>
-                            <a href="/booking/setup/${car.id}/" class="btn-book">Book Now</a>
+                            <a href="/booking/setup/${car.id}/" class="btn btn-premium btn-sm px-3">Book Now</a>
                         </div>
                     </div>
                 </div>

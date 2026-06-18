@@ -12,12 +12,17 @@ class BookingManager(models.Manager):
         errors = {}
         start_date_str = post_data.get('start_date', '')
         end_date_str = post_data.get('end_date', '')
+        location = post_data.get('location', '').strip()
         car_id = post_data.get('car_id', '')
 
         if not start_date_str or not end_date_str:
             errors['dates'] = "Both start date and end date are required."
             return errors
-
+        
+        if not location:
+            errors['location'] = "Delivery location address is required."
+            return errors
+        
         try:
             start_date = date.fromisoformat(start_date_str)
             end_date = date.fromisoformat(end_date_str)
@@ -73,7 +78,7 @@ class BookingManager(models.Manager):
             delivery_location=location,
             special_requests=notes,
             total_fees=total_fees,
-            booking_status='Confirmed'
+            booking_status='Pending'
         )
 
         # Update the car availability to False immediately
@@ -83,9 +88,10 @@ class BookingManager(models.Manager):
 
 class Booking(models.Model):
     STATUS_CHOICES = (
-        ('Confirmed', 'Confirmed'),
-        ('Cancelled', 'Cancelled'),
-    )
+    ('Pending', 'Pending'),      
+    ('Confirmed', 'Confirmed'),  
+    ('Cancelled', 'Cancelled'),
+)
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings')
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='bookings')

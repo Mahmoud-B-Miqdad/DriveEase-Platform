@@ -2,7 +2,7 @@ from django.db import models
 from .booking import Booking
 
 class PaymentManager(models.Manager):
-    def process_invoice(self, booking, payment_method):
+    def process_invoice(self, booking, payment_method, amount_paid):
         """
         Fat Model Behavior: Automatically generates an invoice tied strictly 
         to the booking's total calculated fees (1:1 Relationship).
@@ -10,7 +10,7 @@ class PaymentManager(models.Manager):
         payment = self.create(
             booking=booking,
             payment_method=payment_method,
-            amount_paid=booking.total_fees
+            amount_paid=amount_paid
         )
         return payment
 

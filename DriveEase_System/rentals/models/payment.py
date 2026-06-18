@@ -1,17 +1,48 @@
 from django.db import models
 from .booking import Booking
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class PaymentManager(models.Manager):
     def process_invoice(self, booking, payment_method, amount_paid):
         """
-        Fat Model Behavior: Automatically generates an invoice tied strictly 
-        to the booking's total calculated fees (1:1 Relationship).
+        Fat Model Behavior: 
+        1. Generates an immutable database payment record (1:1 with Booking).
+        2. Automatically upgrades booking status from Pending to Confirmed.
+        3. Dynamically compiles and dispatches the HTML invoice via SendGrid.
         """
         payment = self.create(
             booking=booking,
             payment_method=payment_method,
             amount_paid=amount_paid
         )
+        
+        booking.booking_status = 'Confirmed'
+        booking.save()
+        
+        context = {
+            'user': booking.user,
+            'booking': booking,
+            'payment': payment
+        }
+        
+        html_message = render_to_string('emails/invoice_email.html', context)
+        plain_message = strip_tags(html_message) 
+        
+        try:
+            send_mail(
+                subject=f"DriveEase Ticket secured! Invoice #DE-000{booking.id}",
+                message=plain_message,
+                from_email=None,  
+                recipient_list=[booking.user.email], 
+                html_message=html_message,
+                fail_silently=False,  
+            )
+            print("Successfully processed invoice payment and dispatched Email via SendGrid SMTP!")
+        except Exception as e:
+            print(f"SendGrid SMTP delivery anomaly tracked: {e}")
+            
         return payment
 
 class Payment(models.Model):

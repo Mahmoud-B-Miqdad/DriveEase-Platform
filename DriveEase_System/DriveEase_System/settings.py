@@ -105,6 +105,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# ── SendGrid SMTP Infrastructure Configuration ──
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+EMAIL_HOST_USER = 'apikey' 
+
+EMAIL_HOST_PASSWORD = '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'
+ 
+DEFAULT_FROM_EMAIL = 'mahmoud.b.miqdad@gmail.com'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/

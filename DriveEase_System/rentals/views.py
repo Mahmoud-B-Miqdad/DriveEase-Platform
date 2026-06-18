@@ -158,9 +158,6 @@ def process_payment_action(request, booking_id):
         )
         
         messages.success(request, f"Payment received successfully! Your luxury rental is secured.", extra_tags='success')
-        
-        booking.booking_status = 'Confirmed'
-        booking.save()
         return redirect('catalog')
         
     return redirect('catalog')

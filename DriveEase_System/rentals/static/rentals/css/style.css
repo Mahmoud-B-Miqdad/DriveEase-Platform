@@ -552,6 +552,368 @@ body {
     margin-bottom: 0.5rem;
 }
 
+/* ══════════════════════════════
+   BOOKINGS — STAT CARDS
+══════════════════════════════ */
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+}
+
+.stat-card-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.stat-card-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.stat-card-sub {
+    font-size: 0.65rem;
+    color: var(--text-hint);
+    margin-top: 4px;
+}
+
+/* ══════════════════════════════
+   BOOKINGS — TABLE
+══════════════════════════════ */
+.bookings-table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+    background: transparent;
+}
+
+.bookings-table thead tr {
+    background: var(--surface-raised);
+    border-bottom: 1px solid var(--border);
+}
+
+.bookings-table thead th {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 14px 20px;
+    white-space: nowrap;
+}
+
+.bookings-table tbody tr {
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+    transition: background 0.2s;
+}
+
+.bookings-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.bookings-table tbody tr:hover {
+    background: rgba(201, 168, 76, 0.025);
+}
+
+.bookings-table td {
+    padding: 18px 20px;
+}
+
+/* Vehicle Details Cell */
+.booking-car-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.booking-car-id {
+    font-size: 0.6rem;
+    color: var(--text-hint);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 3px;
+}
+
+/* Rental Period Cell */
+.booking-period {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.booking-duration {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+/* Amount Cell */
+.booking-amount {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+/* ══════════════════════════════
+   BOOKING STATUS BADGES
+══════════════════════════════ */
+.badge-status {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.badge-confirmed {
+    background: rgba(201, 168, 76, 0.07);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    color: var(--gold);
+}
+
+.badge-pending {
+    background: rgba(100, 140, 220, 0.07);
+    border: 1px solid rgba(100, 140, 220, 0.2);
+    color: #7a9fd4;
+}
+
+.badge-cancelled {
+    background: rgba(192, 112, 112, 0.07);
+    border: 1px solid rgba(192, 112, 112, 0.2);
+    color: #c07070;
+}
+
+.badge-completed {
+    background: rgba(80, 180, 120, 0.07);
+    border: 1px solid rgba(80, 180, 120, 0.2);
+    color: #6ec494;
+}
+
+/* ══════════════════════════════
+   CHECKOUT PAGE
+══════════════════════════════ */
+
+/* ── Checkout Panel (Left) ── */
+.checkout-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+}
+
+.checkout-car-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.checkout-car-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.checkout-car-name {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.checkout-car-meta {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+/* Spec Badges Row */
+.specs-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 22px;
+}
+
+.spec-badge {
+    background: rgba(201, 168, 76, 0.07);
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    color: var(--gold);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ── Invoice Box (Right) ── */
+.invoice-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+    position: sticky;
+    top: 24px;
+}
+
+.invoice-box-title {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.invoice-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.invoice-row-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.invoice-row-value {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.invoice-row-included {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+/* Divider with label */
+.invoice-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+}
+
+.invoice-divider::before,
+.invoice-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-subtle);
+}
+
+.invoice-divider span {
+    font-size: 0.58rem;
+    color: var(--text-hint);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Total */
+.invoice-total-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.invoice-total-amount {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.invoice-total-currency {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-left: 5px;
+}
+
+/* Confirm Button */
+.btn-confirm-booking {
+    width: 100%;
+    background: var(--gold);
+    color: var(--obsidian);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 800;
+    font-size: 0.82rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-confirm-booking:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+}
+
+.btn-confirm-booking:active {
+    transform: translateY(0);
+}
+
+/* Security Note */
+.invoice-security-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 12px;
+    font-size: 0.62rem;
+    color: var(--text-hint);
+    letter-spacing: 0.3px;
+}
+
+.invoice-security-note::before,
+.invoice-security-note::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+}
+
 @keyframes spin {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }

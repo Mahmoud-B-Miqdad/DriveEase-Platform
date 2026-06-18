@@ -53,6 +53,9 @@ class BookingManager(models.Manager):
         start_date = date.fromisoformat(post_data['start_date'])
         end_date = date.fromisoformat(post_data['end_date'])
         
+        location = post_data.get('location', 'Main Office')
+        notes = post_data.get('notes', '')
+
         # Calculate rental duration in days
         rental_days = (end_date - start_date).days
         if rental_days == 0:
@@ -67,6 +70,8 @@ class BookingManager(models.Manager):
             car=car,
             start_date=start_date,
             end_date=end_date,
+            delivery_location=location,
+            special_requests=notes,
             total_fees=total_fees,
             booking_status='Confirmed'
         )
@@ -86,6 +91,10 @@ class Booking(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='bookings')
     start_date = models.DateField()
     end_date = models.DateField()
+
+    delivery_location = models.CharField(max_length=255, default='Main Office')
+    special_requests = models.TextField(blank=True, null=True)
+
     total_fees = models.DecimalField(max_digits=10, decimal_places=2)
     booking_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Confirmed')
     

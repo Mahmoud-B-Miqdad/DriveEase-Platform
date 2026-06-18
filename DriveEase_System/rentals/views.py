@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import User, CarCategory, Car
+from .models import *
 from django.contrib import messages
-from .models import User
 import bcrypt
 
 def index(request):
@@ -89,3 +88,39 @@ def logout(request):
     """Clears the session completely and logs out the user."""
     request.session.flush()
     return redirect('auth_index')
+
+def booking_setup(request, car_id):
+    """Route Protection: Displays the booking form for a specific car."""
+    if 'user_id' not in request.session:
+        messages.error(request, "Authentication required. Please sign in first.")
+        return redirect('auth_index')
+        
+    car = Car.objects.filter(id=car_id, is_available=True).first()
+    if not car:
+        messages.error(request, "The selected car is not available for booking.")
+        return redirect('catalog')
+        
+    return render(request, 'booking.html', {'car': car})
+
+
+def create_booking_action(request, car_id):
+    """Processes the booking creation after executing fat model validations."""
+    if request.method == "POST":
+        if 'user_id' not in request.session:
+            return redirect('auth_index')
+            
+        errors = Booking.objects.booking_validator(request.POST)
+        
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('booking_setup', car_id=car_id)
+            
+        user_id = request.session['user_id']
+        booking = Booking.objects.create_booking(request.POST, user_id)
+        
+        messages.success(request, f"Booking #{booking.id} created successfully! Please review your invoice below.")
+        
+        return redirect('catalog')
+        
+    return redirect('catalog')

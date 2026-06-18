@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveEase — Complete Your Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'rentals/css/style.css' %}">
+</head>
+<body style="background-color: var(--obsidian); display: block;">
+
+    <!-- ── Navbar ── -->
+    <nav class="navbar navbar-expand-lg navbar-premium navbar-dark">
+        <div class="container">
+            <a class="navbar-brand brand-logo" href="/catalog/">
+                <i class="fa-solid fa-car-side me-2"></i>Drive<span>Ease</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="/catalog/" class="btn-filter" style="text-decoration: none;">
+                    <i class="fa-solid fa-layer-group me-1" style="font-size: 0.65rem;"></i>Browse Fleet
+                </a>
+                <span class="nav-username">
+                    <i class="fa-regular fa-circle-user"></i>{{ request.session.username }}
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+
+        <!-- Flash Messages -->
+        {% if messages %}
+            <div class="mb-4">
+                {% for message in messages %}
+                    <div class="alert {% if 'success' in message.tags %}alert-custom-success{% else %}alert-custom{% endif %} d-flex align-items-center" role="alert">
+                        <i class="fa-solid {% if 'success' in message.tags %}fa-circle-check{% else %}fa-triangle-exclamation{% endif %} me-2" style="font-size: 0.85rem;"></i>
+                        <div>{{ message }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h2 class="catalog-title">Secure Rental Checkout</h2>
+            <p class="catalog-subtitle">Configure your dates and premium options below to finalize your booking.</p>
+        </div>
+
+        <form method="POST" action="{% url 'create_booking_action' car.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="car_id" value="{{ car.id }}">
+
+            <div class="row g-4 align-items-start">
+
+                <!-- ── Left: Booking Form ── -->
+                <div class="col-lg-8">
+                    <div class="checkout-panel">
+
+                        <!-- Car Header -->
+                        <div class="checkout-car-header">
+                            <div class="checkout-car-icon">
+                                <i class="fa-solid fa-car-side" style="color: var(--gold);"></i>
+                            </div>
+                            <div>
+                                <div class="checkout-car-name">
+                                    {{ car.make }} {{ car.model }}
+                                </div>
+                                <div class="checkout-car-meta">
+                                    Model Year: {{ car.year }} · {{ car.category }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Spec Badges -->
+                        <div class="specs-row">
+                            <span class="spec-badge">
+                                <i class="fa-solid fa-bolt" style="font-size: 0.6rem;"></i> V8 Twin-Turbo
+                            </span>
+                            <span class="spec-badge">
+                                <i class="fa-solid fa-shield" style="font-size: 0.6rem;"></i> Full Coverage
+                            </span>
+                            <span class="spec-badge">
+                                <i class="fa-solid fa-star" style="font-size: 0.6rem;"></i> {{ car.category }}
+                            </span>
+                        </div>
+
+                        <!-- Date Inputs -->
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="field-label">Pick-up Date</label>
+                                <input type="date" name="start_date" id="start_date"
+                                       class="form-control custom-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="field-label">Return Date</label>
+                                <input type="date" name="end_date" id="end_date"
+                                       class="form-control custom-input" required>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label class="field-label">Delivery Location</label>
+                            <input type="text" name="location"
+                                   class="form-control custom-input"
+                                   placeholder="e.g. Premium Valet Airport Lounge or Hotel Delivery"
+                                   required>
+                        </div>
+
+                        <!-- Notes -->
+                        <div>
+                            <label class="field-label">
+                                Special Requests
+                                <span class="optional">(Optional)</span>
+                            </label>
+                            <textarea name="notes" class="form-control custom-input"
+                                      rows="3"
+                                      style="resize: vertical; margin-bottom: 0;"
+                                      placeholder="Add child seats, chauffeur, or any specific requests..."></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ── Right: Invoice Summary ── -->
+                <div class="col-lg-4">
+                    <div class="invoice-box">
+                        <div class="invoice-box-title">Live Statement</div>
+
+                        <!-- Rate Rows -->
+                        <div class="invoice-row">
+                            <span class="invoice-row-label">Daily Rate</span>
+                            <span class="invoice-row-value">
+                                $<span id="daily_rate">{{ car.car_category.daily_rate }}</span> / day
+                            </span>
+                        </div>
+                        <div class="invoice-row">
+                            <span class="invoice-row-label">Duration</span>
+                            <span class="invoice-row-value">
+                                <span id="duration_days">0</span> Days
+                            </span>
+                        </div>
+                        <div class="invoice-row" style="margin-bottom: 0;">
+                            <span class="invoice-row-label">Premium Protection</span>
+                            <span class="invoice-row-included">
+                                <i class="fa-solid fa-circle-check me-1" style="font-size: 0.65rem;"></i>Included
+                            </span>
+                        </div>
+
+                        <div class="invoice-divider"><span>Breakdown</span></div>
+
+                        <div class="invoice-row">
+                            <span class="invoice-row-label">Subtotal</span>
+                            <span class="invoice-row-value">$<span id="subtotal">0.00</span></span>
+                        </div>
+                        <div class="invoice-row" style="margin-bottom: 0;">
+                            <span class="invoice-row-label">Service Fee</span>
+                            <span class="invoice-row-value">$<span id="service_fee">0.00</span></span>
+                        </div>
+
+                        <div class="invoice-divider"></div>
+
+                        <!-- Total -->
+                        <span class="invoice-total-label">Estimated Total</span>
+                        <div class="invoice-total-amount">
+                            $<span id="total_price">0</span>
+                            <span class="invoice-total-currency">USD</span>
+                        </div>
+
+                        <!-- Confirm Button -->
+                        <button type="submit" class="btn-confirm-booking">
+                            <i class="fa-solid fa-lock me-2" style="font-size: 0.75rem;"></i>Confirm & Book Now
+                        </button>
+
+                        <!-- Security Note -->
+                        <div class="invoice-security-note">
+                            Secured · No charges until confirmed
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'rentals/js/booking_calc.js' %}"></script>
+</body>
+</html>

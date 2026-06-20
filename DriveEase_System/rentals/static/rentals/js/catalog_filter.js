@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="car-price">
                                 $${car.rate}<span class="price-unit">/day</span>
                             </div>
-                            <a href="/booking/setup/${car.id}/" class="btn-book">
-                                Book Now <i class="fa-solid fa-arrow-right"></i>
+                            <a href="/catalog/car/${car.id}/" class="btn-book">
+                                View Details <i class="fa-solid fa-circle-info"></i>
                             </a>
                         </div>
                     </div>

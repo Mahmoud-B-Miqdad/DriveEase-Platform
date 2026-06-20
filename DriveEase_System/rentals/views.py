@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from .models import *
 from django.contrib import messages
@@ -83,6 +83,17 @@ def filter_cars(request):
         })
         
     return JsonResponse({'cars': cars_list})
+
+def car_details_view(request, car_id):
+    """
+    Renders the premium details page for a specific luxury vehicle.
+    """
+    car = get_object_or_404(Car, id=car_id)
+    
+    context = {
+        'car': car,
+    }
+    return render(request, 'car_details.html', context)
 
 def logout(request):
     """Clears the session completely and logs out the user."""

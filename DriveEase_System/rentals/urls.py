@@ -10,6 +10,8 @@ urlpatterns = [
     path('catalog/', views.catalog, name='catalog'), 
     path('catalog/filter/', views.filter_cars, name='filter_cars'),
 
+    path('catalog/car/<int:car_id>/', views.car_details_view, name='car_details'),
+
     path('booking/setup/<int:car_id>/', views.booking_setup, name='booking_setup'),
     path('booking/create/<int:car_id>/', views.create_booking_action, name='create_booking_action'),
 

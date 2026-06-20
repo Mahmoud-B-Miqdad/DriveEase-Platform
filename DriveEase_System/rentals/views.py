@@ -79,7 +79,8 @@ def filter_cars(request):
             'model': car.model,
             'year': car.year,
             'category': car.car_category.category_name,
-            'rate': str(car.car_category.daily_rate) 
+            'rate': str(car.car_category.daily_rate), 
+            'image_url':   car.image.url if car.image else None,
         })
         
     return JsonResponse({'cars': cars_list})

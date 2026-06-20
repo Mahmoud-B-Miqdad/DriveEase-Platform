@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rentals',
+    'imagekit',
 ]
 
 AUTH_USER_MODEL = 'rentals.User'

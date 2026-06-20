@@ -1,5 +1,7 @@
 from django.db import models
 from .category import CarCategory
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 class CarManager(models.Manager):
     def get_available_cars(self, category_id=None):
@@ -17,11 +19,14 @@ class Car(models.Model):
     model = models.CharField(max_length=50)      # e.g., Camry
     year = models.IntegerField()                 # e.g., 2024
     is_available = models.BooleanField(default=True)
-    image        = models.ImageField(
-                       upload_to='cars/',
-                       null=True,
-                       blank=True
-                   )
+    image = ProcessedImageField(
+        upload_to='cars/',
+        processors=[ResizeToFill(800, 500)],  
+        format='WEBP',                      
+        options={'quality': 85},           
+        null=True,
+        blank=True
+    )
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -5,93 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DriveEase Premium — Official Invoice</title>
 </head>
-<body style="font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; background-color: #020c1b; padding: 20px; margin: 0; -webkit-font-smoothing: antialiased;">
+<body style="font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; background-color: #0f0f13; padding: 20px; margin: 0; -webkit-font-smoothing: antialiased;">
 
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 30px auto; background-color: #0a192f; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 30px auto; background-color: #141418; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a35; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         
         <tr>
-            <td align="center" style="padding: 35px 30px; background: linear-gradient(135deg, #0f1b29 0%, #0a192f 100%); border-bottom: 2px solid #172a45;">
+            <td align="center" style="padding: 35px 30px; background: linear-gradient(135deg, #1a1a22 0%, #141418 100%); border-bottom: 2px solid #2a2a35;">
                 <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: 1px;">
-                    Drive<span style="color: #2ec4b6;">Ease</span>
+                    Drive<span style="color: #c9a84c;">Ease</span>
                 </h1>
-                <p style="color: #64ffda; margin: 8px 0 0 0; font-size: 13px; font-weight: 600; letter-spacing: 2px;">
+                <p style="color: #c9a84c; margin: 8px 0 0 0; font-size: 13px; font-weight: 600; letter-spacing: 2px;">
                     Premium Fleet Rental Secured
                 </p>
             </td>
         </tr>
 
         <tr>
-            <td style="padding: 40px 30px; color: #8892b0;">
-                <h2 style="color: #e6f1ff; margin-top: 0; font-size: 20px; font-weight: 600;">
+            <td style="padding: 40px 30px; color: #888890;">
+                <h2 style="color: #e4e4e8; margin-top: 0; font-size: 20px; font-weight: 600;">
                     Hello {{ user.first_name }} {{ user.last_name }},
                 </h2>
-                <p style="font-size: 15px; line-height: 1.6; color: #8892b0;">
+                <p style="font-size: 15px; line-height: 1.6; color: #888890;">
                     Your payment transaction has completed successfully. Your luxury fleet asset is formally locked and prepared for dispatch. Below is your official, immutable booking invoice statement.
                 </p>
 
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 30px; margin-bottom: 10px; font-size: 14px;">
                     <tr>
                         <td width="50%" style="padding-bottom: 20px; vertical-align: top;">
-                            <strong style="color: #ccd6f6; display: block; margin-bottom: 5px;">Invoice Number:</strong>
-                            <span style="font-family: monospace; font-size: 15px; color: #2ec4b6; font-weight: bold;">#DE-000{{ booking.id }}</span>
+                            <strong style="color: #e4e4e8; display: block; margin-bottom: 5px;">Invoice Number:</strong>
+                            <span style="font-family: monospace; font-size: 15px; color: #c9a84c; font-weight: bold;">#DE-000{{ booking.id }}</span>
                         </td>
                         <td width="50%" style="padding-bottom: 20px; vertical-align: top; text-align: right;">
-                            <strong style="color: #ccd6f6; display: block; margin-bottom: 5px;">Payment Method:</strong>
-                            <span style="color: #e6f1ff;">{{ payment.payment_method }}</span>
+                            <strong style="color: #e4e4e8; display: block; margin-bottom: 5px;">Payment Method:</strong>
+                            <span style="color: #e4e4e8;">{{ payment.payment_method }}</span>
                         </td>
                     </tr>
                 </table>
 
-                <div style="background-color: #112240; border: 1px solid #233554; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
-                    <h3 style="margin-top: 0; color: #64ffda; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #233554; padding-bottom: 10px;">
+                <div style="background-color: #0f0f13; border: 1px solid #2a2a35; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+                    <h3 style="margin-top: 0; color: #c9a84c; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #2a2a35; padding-bottom: 10px;">
                         Reservation Breakdown
                     </h3>
                     
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size: 14px; line-height: 2;">
                         <tr>
-                            <td style="color: #8892b0;">Vehicle Model:</td>
-                            <td style="text-align: right; color: #e6f1ff; font-weight: 600;">{{ booking.car.make }} {{ booking.car.model }} ({{ booking.car.year }})</td>
+                            <td style="color: #888890;">Vehicle Model:</td>
+                            <td style="text-align: right; color: #e4e4e8; font-weight: 600;">{{ booking.car.make }} {{ booking.car.model }} ({{ booking.car.year }})</td>
                         </tr>
                         <tr>
-                            <td style="color: #8892b0;">Pick-up Date:</td>
-                            <td style="text-align: right; color: #e6f1ff;">{{ booking.start_date }}</td>
+                            <td style="color: #888890;">Pick-up Date:</td>
+                            <td style="text-align: right; color: #e4e4e8;">{{ booking.start_date }}</td>
                         </tr>
                         <tr>
-                            <td style="color: #8892b0;">Return Date:</td>
-                            <td style="text-align: right; color: #e6f1ff;">{{ booking.end_date }}</td>
+                            <td style="color: #888890;">Return Date:</td>
+                            <td style="text-align: right; color: #e4e4e8;">{{ booking.end_date }}</td>
                         </tr>
                         <tr>
-                            <td style="color: #8892b0;">Delivery Location:</td>
-                            <td style="text-align: right; color: #e6f1ff;">{{ booking.delivery_location }}</td>
+                            <td style="color: #888890;">Delivery Location:</td>
+                            <td style="text-align: right; color: #e4e4e8;">{{ booking.delivery_location }}</td>
                         </tr>
                         {% if booking.special_requests %}
                         <tr>
-                            <td style="color: #8892b0; vertical-align: top;">Special Requests:</td>
-                            <td style="text-align: right; color: #ffb703; font-style: italic;">"{{ booking.special_requests }}"</td>
+                            <td style="color: #888890; vertical-align: top;">Special Requests:</td>
+                            <td style="text-align: right; color: #e0bc6a; font-style: italic;">"{{ booking.special_requests }}"</td>
                         </tr>
                         {% endif %}
                         
                         <tr>
-                            <td colspan="2" style="border-top: 1px solid #233554; padding-top: 15px; margin-top: 15px;"></td>
+                            <td colspan="2" style="border-top: 1px solid #2a2a35; padding-top: 15px; margin-top: 15px;"></td>
                         </tr>
                         
                         <tr style="font-size: 16px;">
                             <td style="color: #ffffff; font-weight: bold; padding-top: 5px;">Total Paid (USD):</td>
-                            <td style="text-align: right; color: #2ec4b6; font-weight: bold; font-size: 22px; padding-top: 5px;">
+                            <td style="text-align: right; color: #c9a84c; font-weight: bold; font-size: 22px; padding-top: 5px;">
                                 ${{ booking.total_fees }}
                             </td>
                         </tr>
                     </table>
                 </div>
 
-                <p style="font-size: 13px; line-height: 1.5; color: #8892b0; margin-bottom: 0; text-align: center;">
+                <p style="font-size: 13px; line-height: 1.5; color: #888890; margin-bottom: 0; text-align: center;">
                     If you require modifications or have logistical constraints, please coordinate directly with our 24/7 concierge support desk.
                 </p>
             </td>
         </tr>
 
         <tr>
-            <td align="center" style="padding: 25px 30px; background-color: #020c1b; border-top: 1px solid #172a45; font-size: 12px; color: #495670;">
+            <td align="center" style="padding: 25px 30px; background-color: #0f0f13; border-top: 1px solid #1e1e28; font-size: 12px; color: #44444f;">
                 <p style="margin: 0 0 5px 0;">&copy; 2026 DriveEase Platform. Built for Luxury Mobility.</p>
                 <p style="margin: 0;">This is an automated operational invoice, replies are non-monitored.</p>
             </td>

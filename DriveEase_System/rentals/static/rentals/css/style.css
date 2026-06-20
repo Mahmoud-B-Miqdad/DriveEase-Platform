@@ -3,21 +3,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --obsidian:      #0f0f13;
-    --surface:       #141418;
-    --surface-raised:#1a1a22;
-    --border:        #2a2a35;
-    --border-subtle: #1e1e28;
-    --gold:          #c9a84c;
-    --gold-light:    #e0bc6a;
-    --gold-dim:      rgba(201, 168, 76, 0.12);
-    --text-primary:  #e4e4e8;
-    --text-secondary:#888890;
-    --text-muted:    #44444f;
-    --text-hint:     #333340;
+    --obsidian:       #0a0b10; 
+    --surface:        #12131a; 
+    --surface-raised: #1a1c26; 
+    --border:         #2a2d3d; 
+    --border-subtle:  #181a24;
+    --gold:           #e5b842; 
+    --gold-light:     #f3d37c; 
+    --gold-dim:       rgba(229, 184, 66, 0.15); 
+    --text-primary:   #ffffff; 
+    --text-secondary: #cbd5e1; 
+    --text-muted:     #94a3b8; 
+    --text-hint:      #64748b; 
 }
-
 *, *::before, *::after { box-sizing: border-box; }
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(58%) sepia(45%) saturate(600%) hue-rotate(5deg) brightness(85%);
+    cursor: pointer;
+}
 
 body {
     background-color: var(--obsidian);
@@ -319,7 +324,7 @@ body {
 }
 
 /* ══════════════════════════════
-   NAVBAR
+   NAVBAR (shared — used by bookings, checkout, etc.)
 ══════════════════════════════ */
 .navbar-premium {
     background-color: var(--surface);
@@ -356,24 +361,590 @@ body {
     font-weight: 700;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    padding: 5px 16px;
+    padding: 6px 18px;
     border-radius: 20px;
-    border: 1px solid #3a2a2a;
+    border: 1px solid rgba(192, 112, 112, 0.35);
     color: #c07070;
     background: transparent;
-    transition: all 0.2s;
+    transition: all 0.22s ease;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .btn-signout:hover {
-    background: rgba(192, 112, 112, 0.08);
+    background: rgba(192, 112, 112, 0.09);
     border-color: #c07070;
     color: #d08080;
 }
 
+/* ══════════════════════════════════════════════════
+   CATALOG PAGE — FULL REDESIGN
+══════════════════════════════════════════════════ */
+
+/* Body override */
+body.catalog-page {
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+    background-color: var(--obsidian);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Ambient orbs */
+.catalog-orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+}
+
+.catalog-orb-1 {
+    width: 600px;
+    height: 400px;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(184, 146, 42, 0.055) 0%, transparent 70%);
+}
+
+.catalog-orb-2 {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    right: -100px;
+    background: radial-gradient(ellipse, rgba(100, 120, 200, 0.04) 0%, transparent 70%);
+}
+
+/* ── Catalog Navbar ── */
+.navbar-catalog {
+    background: rgba(8, 8, 16, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+}
+
+.navbar-catalog .brand-logo {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.navbar-catalog .brand-logo:hover { opacity: 0.85; }
+
+.nav-user-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.2px;
+}
+
+.nav-user-pill i {
+    color: var(--gold);
+    font-size: 0.85rem;
+}
+
+/* ── Hero Section ── */
+.catalog-hero {
+    position: relative;
+    z-index: 1;
+    padding: 4.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 2.5rem;
+}
+
+.catalog-hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.catalog-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid rgba(184, 146, 42, 0.22);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
+.catalog-hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 0.85rem;
+}
+
+.text-gold { color: var(--gold); }
+
+.catalog-hero-sub {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 380px;
+    margin: 0;
+}
+
+/* Stats box */
+.catalog-hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.6rem 2rem;
+    flex-shrink: 0;
+    gap: 2rem;
+}
+
+.hero-stat { text-align: center; }
+
+.hero-stat-num {
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 5px;
+}
+
+.hero-stat-unit {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.hero-stat-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.hero-stat-divider {
+    width: 1px;
+    height: 34px;
+    background: var(--border);
+    flex-shrink: 0;
+}
+
+/* ── Main ── */
+.catalog-main {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 5rem;
+}
+
+/* ── Filter Bar ── */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-bar-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.btn-filter {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 6px 18px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-filter:hover {
+    border-color: rgba(184, 146, 42, 0.5);
+    color: var(--gold-light);
+    background: var(--gold-dim);
+}
+
+.btn-filter.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--obsidian);
+    box-shadow: 0 4px 14px rgba(184, 146, 42, 0.25);
+}
+
+.filter-results-count {
+    font-size: 0.62rem;
+    color: var(--text-hint);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-left: auto;
+}
+
 /* ══════════════════════════════
-   PAGE HEADER
+   CAR CARDS — REDESIGNED
 ══════════════════════════════ */
+.car-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.car-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(184, 146, 42, 0.4);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55),
+                0 0 0 1px rgba(184, 146, 42, 0.06);
+}
+
+/* Image area */
+.car-card-image {
+    height: 165px;
+    background: linear-gradient(135deg, #0c0c1f 0%, #13132b 45%, #0a0a1a 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.car-card-image::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 70%; height: 70%;
+    background: radial-gradient(ellipse at center bottom, rgba(184, 146, 42, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.car-card-image::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(14, 14, 24, 0.6) 100%);
+}
+
+.car-card-img-icon {
+    font-size: 4.2rem;
+    color: rgba(184, 146, 42, 0.14);
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.car-card:hover .car-card-img-icon {
+    color: rgba(184, 146, 42, 0.28);
+    transform: scale(1.06) translateY(-3px);
+}
+
+.car-card-img-shine {
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184, 146, 42, 0.08) 0%, transparent 70%);
+    z-index: 1;
+}
+
+/* Card body */
+.car-card-body {
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Category badge */
+.car-category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(184, 146, 42, 0.08);
+    border: 1px solid rgba(184, 146, 42, 0.2);
+    color: var(--gold);
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 11px;
+    border-radius: 20px;
+    align-self: flex-start;
+    margin-bottom: 12px;
+}
+
+/* Car name */
+.car-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+    margin-bottom: 3px;
+    line-height: 1.2;
+}
+
+.car-year {
+    font-size: 0.67rem;
+    color: var(--text-hint);
+    margin-bottom: 0;
+    letter-spacing: 0.3px;
+}
+
+/* Specs row */
+.car-specs-row {
+    display: flex;
+    gap: 6px;
+    margin: 13px 0 0;
+    flex-wrap: wrap;
+}
+
+.car-spec-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+    border-radius: 7px;
+    padding: 4px 10px;
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+}
+
+.car-spec-chip i {
+    font-size: 0.6rem;
+    color: var(--gold);
+}
+
+/* Card footer */
+.car-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 16px;
+    margin-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.car-price {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.5px;
+}
+
+.car-price .price-unit {
+    font-size: 0.63rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 3px;
+    letter-spacing: 0;
+}
+
+.btn-book {
+    background: var(--gold);
+    color: var(--obsidian);
+    border: none;
+    border-radius: 9px;
+    padding: 8px 18px;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.22s, transform 0.15s, box-shadow 0.22s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-book:hover {
+    background: var(--gold-light);
+    color: var(--obsidian);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(184, 146, 42, 0.3);
+}
+
+.btn-book:active { transform: translateY(0); box-shadow: none; }
+
+/* ══════════════════════════════
+   LOADING & EMPTY STATES
+══════════════════════════════ */
+.state-loading,
+.state-empty {
+    text-align: center;
+    padding: 5rem 1rem;
+    color: var(--text-muted);
+}
+
+.state-loading .spinner-icon {
+    font-size: 1.8rem;
+    color: var(--gold);
+    animation: spin 1s linear infinite;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.state-loading p,
+.state-empty p {
+    font-size: 0.82rem;
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+}
+
+.state-empty .empty-icon {
+    font-size: 2.2rem;
+    color: var(--border);
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+/* ── Catalog Footer ── */
+.catalog-footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border-subtle);
+    padding: 1.6rem 0;
+    background: var(--surface);
+}
+
+.catalog-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.brand-logo-sm {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.brand-logo-sm span { color: var(--gold); opacity: 0.7; }
+
+.catalog-footer-copy {
+    font-size: 0.62rem;
+    color: var(--text-hint);
+    letter-spacing: 0.3px;
+}
+
+.catalog-footer-badges {
+    display: flex;
+    gap: 8px;
+}
+
+.footer-badge {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.footer-badge i { color: var(--gold); font-size: 0.55rem; }
+
+/* ── Catalog Responsive ── */
+@media (max-width: 768px) {
+    .catalog-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .catalog-hero-title {
+        font-size: 2.2rem;
+    }
+
+    .catalog-hero-stats {
+        width: 100%;
+        justify-content: center;
+        padding: 1.2rem 1.5rem;
+    }
+
+    .filter-bar {
+        gap: 0.75rem;
+    }
+
+    .filter-results-count {
+        margin-left: 0;
+    }
+
+    .catalog-footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* ──────────────────────────────
+   Catalog page heading (legacy — kept for other pages)
+────────────────────────────── */
 .catalog-title {
     font-size: 1.45rem;
     font-weight: 800;
@@ -385,171 +956,6 @@ body {
     font-size: 0.77rem;
     color: var(--text-muted);
     margin-top: 5px;
-}
-
-/* ══════════════════════════════
-   FILTER BUTTONS
-══════════════════════════════ */
-.btn-filter {
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 5px 18px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-filter:hover {
-    border-color: rgba(201, 168, 76, 0.45);
-    color: var(--gold);
-    background: var(--gold-dim);
-}
-
-.btn-filter.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--obsidian);
-}
-
-/* ══════════════════════════════
-   CAR CARDS
-══════════════════════════════ */
-.car-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.car-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(201, 168, 76, 0.35);
-    box-shadow: 0 10px 32px rgba(201, 168, 76, 0.07);
-}
-
-.car-card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-/* Category Badge */
-.car-category-badge {
-    display: inline-block;
-    background: rgba(201, 168, 76, 0.08);
-    border: 1px solid rgba(201, 168, 76, 0.2);
-    color: var(--gold);
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 20px;
-    align-self: flex-start;
-    margin-bottom: 10px;
-}
-
-/* Car Name */
-.car-title {
-    font-size: 0.97rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: 0.2px;
-    margin-bottom: 4px;
-}
-
-.car-year {
-    font-size: 0.68rem;
-    color: var(--text-hint);
-    margin-bottom: 0;
-}
-
-/* Card Footer */
-.car-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--border-subtle);
-}
-
-.car-price {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--gold);
-    line-height: 1;
-}
-
-.car-price .price-unit {
-    font-size: 0.65rem;
-    font-weight: 400;
-    color: var(--text-muted);
-    margin-left: 2px;
-}
-
-/* Book Button */
-.btn-book {
-    background: var(--gold);
-    color: var(--obsidian);
-    border: none;
-    border-radius: 8px;
-    padding: 7px 16px;
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-block;
-}
-
-.btn-book:hover {
-    background: var(--gold-light);
-    color: var(--obsidian);
-    transform: translateY(-1px);
-}
-
-.btn-book:active {
-    transform: translateY(0);
-}
-
-/* ══════════════════════════════
-   LOADING & EMPTY STATES
-══════════════════════════════ */
-.state-loading,
-.state-empty {
-    text-align: center;
-    padding: 4rem 1rem;
-    color: var(--text-muted);
-}
-
-.state-loading .spinner-icon {
-    font-size: 1.6rem;
-    color: var(--gold);
-    animation: spin 1s linear infinite;
-}
-
-.state-loading p,
-.state-empty p {
-    font-size: 0.8rem;
-    margin-top: 0.75rem;
-    color: var(--text-muted);
-}
-
-.state-empty .empty-icon {
-    font-size: 2rem;
-    color: var(--border);
-    display: block;
-    margin-bottom: 0.5rem;
 }
 
 /* ══════════════════════════════

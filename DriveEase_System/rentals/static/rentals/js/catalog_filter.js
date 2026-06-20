@@ -10,8 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return; // Safe exit if DOM components are absent
     }
 
+    const resultsCount = document.getElementById('results-count');
+
     // Set loading spinner state
     function setLoading() {
+        if (resultsCount) resultsCount.textContent = '';
         container.innerHTML = `
             <div class="col-12 state-loading">
                 <i class="fa-solid fa-spinner spinner-icon"></i>
@@ -22,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Render vehicle cards grid dynamically
     function renderCars(cars) {
         if (!cars || cars.length === 0) {
+            if (resultsCount) resultsCount.textContent = '';
             container.innerHTML = `
                 <div class="col-12 state-empty">
                     <i class="fa-solid fa-car-tunnel empty-icon"></i>
@@ -30,18 +34,35 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        if (resultsCount) {
+            resultsCount.textContent = `${cars.length} vehicle${cars.length !== 1 ? 's' : ''} found`;
+        }
+
         container.innerHTML = cars.map(car => `
             <div class="col">
                 <div class="car-card h-100">
+                    <div class="car-card-image">
+                        <div class="car-card-img-shine"></div>
+                        <i class="fa-solid fa-car-side car-card-img-icon"></i>
+                    </div>
                     <div class="car-card-body">
-                        <span class="car-category-badge">${car.category}</span>
+                        <span class="car-category-badge">
+                            <i class="fa-solid fa-tag"></i>${car.category}
+                        </span>
                         <h5 class="car-title">${car.make} ${car.model}</h5>
-                        <p class="car-year">Model Year: ${car.year}</p>
+                        <p class="car-year">Model Year &middot; ${car.year}</p>
+                        <div class="car-specs-row">
+                            <span class="car-spec-chip"><i class="fa-solid fa-gas-pump"></i>Fuel</span>
+                            <span class="car-spec-chip"><i class="fa-solid fa-gears"></i>Auto</span>
+                            <span class="car-spec-chip"><i class="fa-solid fa-user-group"></i>5 Seats</span>
+                        </div>
                         <div class="car-card-footer">
                             <div class="car-price">
                                 $${car.rate}<span class="price-unit">/day</span>
                             </div>
-                            <a href="/booking/setup/${car.id}/" class="btn btn-premium btn-sm px-3">Book Now</a>
+                            <a href="/booking/setup/${car.id}/" class="btn-book">
+                                Book Now <i class="fa-solid fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>

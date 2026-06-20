@@ -47,7 +47,14 @@
             <!-- ── Left: Car Visual ── -->
             <div class="col-lg-6">
                 <div class="car-visual-panel">
-                    <i class="fa-solid fa-car-side car-visual-icon"></i>
+                    {% if car.image %}
+                        <img
+                            src="{{ car.image.url }}"
+                            alt="{{ car.make }} {{ car.model }}"
+                            class="car-detail-img">
+                    {% else %}
+                        <i class="fa-solid fa-car-side car-visual-icon"></i>
+                    {% endif %}
                 </div>
             </div>
 

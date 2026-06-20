@@ -1740,7 +1740,7 @@ body.catalog-page {
     background: linear-gradient(145deg, #1a1a22 0%, #141418 100%);
     border: 1px solid var(--border);
     border-radius: 18px;
-    min-height: 380px;
+    min-height: 335px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2739,6 +2739,25 @@ body.catalog-page {
     height: 36px;
     width: 100%;
     margin-top: 8px;
+}
+
+/* ══════════════════════════════
+   CAR DETAIL — IMAGE
+══════════════════════════════ */
+.car-detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        
+    object-position: center;
+    padding: 0;               
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.car-visual-panel:hover .car-detail-img {
+    transform: translateZ(0) scale(1.04);
 }
 
 /* Responsive */

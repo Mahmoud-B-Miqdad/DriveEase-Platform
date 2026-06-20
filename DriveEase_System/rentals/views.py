@@ -60,29 +60,63 @@ def catalog(request):
 
 
 def filter_cars(request):
-    """AJAX Endpoint: Fetches available cars filtered by category as JSON."""
+    """AJAX Endpoint: Fetches available cars filtered by category, price, year, and sort as JSON."""
     if 'user_id' not in request.session:
         return JsonResponse({'error': 'Unauthorized'}, status=401)
-        
-    category_id = request.GET.get('category_id', None)
-    
-    if category_id == 'all' or not category_id:
-        cars_queryset = Car.objects.get_available_cars()
+
+    category_id  = request.GET.get('category_id')
+    price_range  = request.GET.get('price_range')
+    year_filter  = request.GET.get('year')
+    sort_by      = request.GET.get('sort_by', 'default')
+
+    # ── Base queryset
+    cars = Car.objects.filter(is_available=True).select_related('car_category')
+
+    # ── Filter: Category
+    if category_id and category_id != 'all':
+        cars = cars.filter(car_category_id=category_id)
+
+    # ── Filter: Price Range
+    if price_range == 'budget':
+        cars = cars.filter(car_category__daily_rate__lt=100)
+    elif price_range == 'mid':
+        cars = cars.filter(car_category__daily_rate__gte=100,
+                           car_category__daily_rate__lte=300)
+    elif price_range == 'premium':
+        cars = cars.filter(car_category__daily_rate__gt=300)
+
+    # ── Filter: Year
+    if year_filter and year_filter != 'all':
+        if year_filter == '2020-2022':
+            cars = cars.filter(year__gte=2020, year__lte=2022)
+        elif year_filter == '2023':
+            cars = cars.filter(year=2023)
+        elif year_filter == '2024':
+            cars = cars.filter(year=2024)
+
+    # ── Sort
+    if sort_by == 'price_asc':
+        cars = cars.order_by('car_category__daily_rate')
+    elif sort_by == 'price_desc':
+        cars = cars.order_by('-car_category__daily_rate')
+    elif sort_by == 'year_desc':
+        cars = cars.order_by('-year')
     else:
-        cars_queryset = Car.objects.get_available_cars(category_id=category_id)
-        
-    cars_list = []
-    for car in cars_queryset:
-        cars_list.append({
-            'id': car.id,
-            'make': car.make,
-            'model': car.model,
-            'year': car.year,
-            'category': car.car_category.category_name,
-            'rate': str(car.car_category.daily_rate), 
-            'image_url':   car.image.url if car.image else None,
-        })
-        
+        cars = cars.order_by('id')
+
+    cars_list = [
+        {
+            'id':        car.id,
+            'make':      car.make,
+            'model':     car.model,
+            'year':      car.year,
+            'category':  car.car_category.category_name,
+            'rate':      str(car.car_category.daily_rate),
+            'image_url': car.image.url if car.image else None,
+        }
+        for car in cars
+    ]
+
     return JsonResponse({'cars': cars_list})
 
 def car_details_view(request, car_id):

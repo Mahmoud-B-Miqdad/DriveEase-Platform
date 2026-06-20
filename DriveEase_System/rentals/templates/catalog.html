@@ -14,59 +14,174 @@
 </head>
 <body style="background-color: var(--obsidian); display: block;">
 
-<nav class="navbar navbar-expand-lg navbar-premium navbar-dark">
-    <div class="container">
-        <a class="navbar-brand brand-logo" href="{% url 'catalog' %}">
-            <i class="fa-solid fa-car-side me-2"></i>Drive<span>Ease</span>
-        </a>
-        <div class="d-flex align-items-center gap-3">
-            <a href="{% url 'about' %}"
-               class="btn-filter {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
-               style="text-decoration: none;">
-                <i class="fa-solid fa-circle-info me-1" style="font-size: 0.65rem;"></i>About
+    <!-- ── Navbar ── -->
+    <nav class="navbar navbar-expand-lg navbar-premium navbar-dark">
+        <div class="container">
+            <a class="navbar-brand brand-logo" href="{% url 'catalog' %}">
+                <i class="fa-solid fa-car-side me-2"></i>Drive<span>Ease</span>
             </a>
-            <a href="{% url 'my_bookings' %}"
-               class="btn-filter {% if request.resolver_match.url_name == 'my_bookings' %}active{% endif %}"
-               style="text-decoration: none;">
-                <i class="fa-solid fa-folder-open me-1" style="font-size: 0.65rem;"></i>My Bookings
-            </a>
-            <span class="nav-username">
-                <i class="fa-regular fa-circle-user"></i>{{ request.session.username }}
-            </span>
-            <a href="{% url 'auth_logout' %}" class="btn-signout">Sign Out</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="{% url 'about' %}"
+                   class="btn-filter {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                   style="text-decoration: none;">
+                    <i class="fa-solid fa-circle-info me-1" style="font-size: 0.65rem;"></i>About
+                </a>
+                <a href="{% url 'my_bookings' %}"
+                   class="btn-filter {% if request.resolver_match.url_name == 'my_bookings' %}active{% endif %}"
+                   style="text-decoration: none;">
+                    <i class="fa-solid fa-folder-open me-1" style="font-size: 0.65rem;"></i>My Bookings
+                </a>
+                <span class="nav-username">
+                    <i class="fa-regular fa-circle-user"></i>{{ request.session.username }}
+                </span>
+                <a href="{% url 'auth_logout' %}" class="btn-signout">Sign Out</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <div class="container my-5">
 
+        <!-- Flash Messages -->
         {% if messages %}
-    <div class="row justify-content-center mb-4">
-        <div class="col-12">
-            {% for message in messages %}
-                <div class="alert {% if 'success' in message.tags %}alert-custom-success{% else %}alert-custom{% endif %} d-flex align-items-center" role="alert">
-                    <i class="fa-solid {% if 'success' in message.tags %}fa-circle-check{% else %}fa-triangle-exclamation{% endif %} me-2"></i>
-                    <div>{{ message }}</div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+            <div class="mb-4">
+                {% for message in messages %}
+                    <div class="alert {% if 'success' in message.tags %}alert-custom-success{% else %}alert-custom{% endif %} d-flex align-items-center" role="alert">
+                        <i class="fa-solid {% if 'success' in message.tags %}fa-circle-check{% else %}fa-triangle-exclamation{% endif %} me-2"></i>
+                        <div>{{ message }}</div>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
 
+        <!-- Page Header -->
         <div class="mb-4">
             <h2 class="catalog-title">Our Premium Fleet</h2>
-            <p class="catalog-subtitle">Select a category below to filter our luxury vehicles instantly.</p>
+            <p class="catalog-subtitle">Discover and filter our curated luxury vehicles.</p>
         </div>
 
-        <div class="d-flex flex-wrap gap-2 mb-5">
-            <button class="btn btn-filter active" data-category="all">All Vehicles</button>
-            {% for category in categories %}
-                <button class="btn btn-filter" data-category="{{ category.id }}">
-                    {{ category.category_name }}
+        <!-- ── Filter Toolbar ── -->
+        <div class="filter-toolbar">
+
+            <!-- Category -->
+            <div class="filter-drop">
+                <button class="filter-btn" id="btn-category">
+                    <i class="fa-solid fa-layer-group filter-icon"></i>
+                    Category: <span class="filter-selected" id="sel-category">All</span>
+                    <i class="fa-solid fa-chevron-down filter-chevron"></i>
                 </button>
-            {% endfor %}
+                <div class="drop-panel" id="panel-category">
+                    <div class="drop-option selected"
+                         data-filter="category" data-value="all" data-label="All">
+                        <i class="fa-solid fa-border-all"></i>All Vehicles
+                    </div>
+                    {% for category in categories %}
+                        <div class="drop-option"
+                             data-filter="category"
+                             data-value="{{ category.id }}"
+                             data-label="{{ category.category_name }}">
+                            <i class="fa-solid fa-car"></i>{{ category.category_name }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="filter-drop">
+                <button class="filter-btn" id="btn-price_range">
+                    <i class="fa-solid fa-dollar-sign filter-icon"></i>
+                    Price: <span class="filter-selected" id="sel-price_range">Any</span>
+                    <i class="fa-solid fa-chevron-down filter-chevron"></i>
+                </button>
+                <div class="drop-panel" id="panel-price_range">
+                    <div class="drop-option selected"
+                         data-filter="price_range" data-value="" data-label="Any">
+                        <i class="fa-solid fa-infinity"></i>Any Price
+                    </div>
+                    <div class="drop-option"
+                         data-filter="price_range" data-value="budget" data-label="&lt;$100">
+                        <i class="fa-solid fa-arrow-down"></i>Under $100
+                    </div>
+                    <div class="drop-option"
+                         data-filter="price_range" data-value="mid" data-label="$100–$300">
+                        <i class="fa-solid fa-minus"></i>$100 – $300
+                    </div>
+                    <div class="drop-option"
+                         data-filter="price_range" data-value="premium" data-label="$300+">
+                        <i class="fa-solid fa-crown"></i>$300+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year -->
+            <div class="filter-drop">
+                <button class="filter-btn" id="btn-year">
+                    <i class="fa-solid fa-calendar-days filter-icon"></i>
+                    Year: <span class="filter-selected" id="sel-year">All</span>
+                    <i class="fa-solid fa-chevron-down filter-chevron"></i>
+                </button>
+                <div class="drop-panel" id="panel-year">
+                    <div class="drop-option selected"
+                         data-filter="year" data-value="all" data-label="All">
+                        <i class="fa-solid fa-calendar"></i>All Years
+                    </div>
+                    <div class="drop-option"
+                         data-filter="year" data-value="2020-2022" data-label="2020–2022">
+                        <i class="fa-solid fa-clock-rotate-left"></i>2020–2022
+                    </div>
+                    <div class="drop-option"
+                         data-filter="year" data-value="2023" data-label="2023">
+                        <i class="fa-solid fa-calendar-check"></i>2023
+                    </div>
+                    <div class="drop-option"
+                         data-filter="year" data-value="2024" data-label="2024">
+                        <i class="fa-solid fa-star"></i>2024
+                    </div>
+                </div>
+            </div>
+
+            <div class="toolbar-divider"></div>
+
+            <!-- Sort -->
+            <div class="filter-drop">
+                <button class="filter-btn" id="btn-sort_by">
+                    <i class="fa-solid fa-arrow-up-wide-short filter-icon"></i>
+                    Sort: <span class="filter-selected" id="sel-sort_by">Default</span>
+                    <i class="fa-solid fa-chevron-down filter-chevron"></i>
+                </button>
+                <div class="drop-panel" id="panel-sort_by">
+                    <div class="drop-option selected"
+                         data-filter="sort_by" data-value="default" data-label="Default">
+                        <i class="fa-solid fa-grip"></i>Default
+                    </div>
+                    <div class="drop-option"
+                         data-filter="sort_by" data-value="price_asc" data-label="Price ↑">
+                        <i class="fa-solid fa-arrow-up"></i>Price: Low to High
+                    </div>
+                    <div class="drop-option"
+                         data-filter="sort_by" data-value="price_desc" data-label="Price ↓">
+                        <i class="fa-solid fa-arrow-down"></i>Price: High to Low
+                    </div>
+                    <div class="drop-option"
+                         data-filter="sort_by" data-value="year_desc" data-label="Newest">
+                        <i class="fa-solid fa-star"></i>Newest First
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reset -->
+            <button class="btn-toolbar-reset" id="reset-filters">
+                <i class="fa-solid fa-rotate-left" style="font-size: 0.55rem;"></i>Reset
+            </button>
+
         </div>
 
+        <!-- Results Bar -->
+        <div class="filter-results-bar">
+            <span id="results-count" class="results-count-text"></span>
+            <div class="active-tags" id="active-tags"></div>
+        </div>
+
+        <!-- Cars Grid -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cars-container"></div>
 
     </div>

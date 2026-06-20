@@ -2760,6 +2760,470 @@ body.catalog-page {
     transform: translateZ(0) scale(1.04);
 }
 
+/* ══════════════════════════════
+   CATALOG FILTERS — ADVANCED
+══════════════════════════════ */
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+}
+
+.filter-group-label i {
+    color: var(--gold);
+    font-size: 0.6rem;
+}
+
+/* Secondary filters row */
+.filter-row-secondary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.filter-group-inline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Small filter buttons */
+.btn-filter-sm {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 4px 14px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-filter-sm:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    background: var(--gold-dim);
+}
+
+.btn-filter-sm.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--obsidian);
+}
+
+/* Results bar */
+.filter-results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.results-count-text {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Reset button */
+.btn-reset-filters {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 4px 14px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none; 
+}
+
+.btn-reset-filters.visible {
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-reset-filters:hover {
+    border-color: rgba(192, 112, 112, 0.4);
+    color: #c07070;
+    background: rgba(192, 112, 112, 0.05);
+}
+
+
+/* ══════════════════════════════
+   CATALOG FILTERS — REDESIGN
+══════════════════════════════ */
+
+.filters-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px 22px;
+    margin-bottom: 2rem;
+}
+
+/* ── Filter Row ── */
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.filter-row:first-of-type { padding-top: 0; }
+.filter-row:last-of-type  { border-bottom: none; padding-bottom: 0; }
+
+/* ── Label ── */
+.filter-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    min-width: 72px;
+    flex-shrink: 0;
+}
+
+.filter-label i {
+    color: var(--gold);
+    font-size: 0.6rem;
+}
+
+/* ── Vertical Divider ── */
+.filter-v-divider {
+    width: 1px;
+    height: 28px;
+    background: var(--border);
+    flex-shrink: 0;
+}
+
+/* ── Pills ── */
+.filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+}
+
+.pill {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Inter', sans-serif;
+}
+
+.pill i { font-size: 0.55rem; }
+
+.pill:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.06);
+}
+
+.pill.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--obsidian);
+    font-weight: 700;
+}
+
+/* ── Results Bar ── */
+.filter-results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.results-count-text {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.results-count-text strong {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+/* ── Reset Button ── */
+.btn-reset-filters {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 4px 12px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-reset-filters.visible {
+    display: inline-flex;
+}
+
+.btn-reset-filters:hover {
+    border-color: rgba(192, 112, 112, 0.4);
+    color: #c07070;
+    background: rgba(192, 112, 112, 0.05);
+}
+
+/* ══════════════════════════════
+   FILTER TOOLBAR
+══════════════════════════════ */
+.filter-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 8px 10px;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+}
+
+/* ── Dropdown Trigger ── */
+.filter-drop { position: relative; }
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 7px 13px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+}
+
+.filter-btn:hover {
+    border-color: rgba(201, 168, 76, 0.35);
+    color: var(--gold);
+}
+
+.filter-btn.has-value {
+    border-color: rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.07);
+}
+
+.filter-btn .filter-icon {
+    font-size: 0.6rem;
+    color: var(--gold);
+}
+
+.filter-btn .filter-chevron {
+    font-size: 0.5rem;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+}
+
+.filter-btn .filter-selected {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+/* ── Dropdown Panel ── */
+.drop-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    min-width: 175px;
+    z-index: 200;
+    display: none;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    animation: dropIn 0.16s ease;
+}
+
+.drop-panel.open { display: block; }
+
+@keyframes dropIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.drop-option {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.drop-option i {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    width: 12px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.drop-option:hover {
+    background: rgba(201, 168, 76, 0.07);
+    color: var(--text-primary);
+}
+
+.drop-option:hover i { color: var(--gold); }
+
+.drop-option.selected {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.drop-option.selected i { color: var(--gold); }
+
+.drop-option.selected::after {
+    content: '✦';
+    margin-left: auto;
+    font-size: 0.5rem;
+    color: var(--gold);
+}
+
+/* ── Toolbar Divider ── */
+.toolbar-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--border);
+    flex-shrink: 0;
+    margin: 0 2px;
+}
+
+/* ── Reset Button ── */
+.btn-toolbar-reset {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-toolbar-reset.visible { display: inline-flex; }
+
+.btn-toolbar-reset:hover {
+    color: #c07070;
+    border-color: rgba(192, 112, 112, 0.3);
+    background: rgba(192, 112, 112, 0.05);
+}
+
+/* ── Results Bar ── */
+.filter-results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    min-height: 24px;
+}
+
+.results-count-text {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.results-count-text strong {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.active-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.active-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--gold);
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.active-tag button {
+    background: none;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 0.65rem;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+}
+
+.active-tag button:hover { opacity: 1; }
+
 /* Responsive */
 @media (max-width: 768px) {
     .about-hero-title { font-size: 2rem; }

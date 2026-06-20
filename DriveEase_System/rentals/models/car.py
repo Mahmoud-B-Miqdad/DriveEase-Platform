@@ -17,6 +17,11 @@ class Car(models.Model):
     model = models.CharField(max_length=50)      # e.g., Camry
     year = models.IntegerField()                 # e.g., 2024
     is_available = models.BooleanField(default=True)
+    image        = models.ImageField(
+                       upload_to='cars/',
+                       null=True,
+                       blank=True
+                   )
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

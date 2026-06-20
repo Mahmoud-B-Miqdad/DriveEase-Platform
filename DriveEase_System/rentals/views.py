@@ -186,3 +186,10 @@ def process_payment_action(request, booking_id):
         return redirect('catalog')
         
     return redirect('catalog')
+
+
+def about_view(request):
+    """
+    Renders the premium corporate profile and vision page for DriveEase.
+    """
+    return render(request, 'about.html')

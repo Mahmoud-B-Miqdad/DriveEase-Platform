@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveEase — About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'rentals/css/style.css' %}">
+</head>
+<body style="background-color: var(--obsidian); display: block;">
+
+    <!-- ── Navbar ── -->
+    <nav class="navbar navbar-expand-lg navbar-premium navbar-dark">
+        <div class="container">
+            <a class="navbar-brand brand-logo" href="{% url 'catalog' %}">
+                <i class="fa-solid fa-car-side me-2"></i>Drive<span>Ease</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="{% url 'catalog' %}" class="btn-filter" style="text-decoration: none;">
+                    <i class="fa-solid fa-layer-group me-1" style="font-size: 0.65rem;"></i>Browse Fleet
+                </a>
+                <a href="{% url 'my_bookings' %}"
+                   class="btn-filter {% if request.resolver_match.url_name == 'my_bookings' %}active{% endif %}"
+                   style="text-decoration: none;">
+                    <i class="fa-solid fa-folder-open me-1" style="font-size: 0.65rem;"></i>My Bookings
+                </a>
+                <span class="nav-username">
+                    <i class="fa-regular fa-circle-user"></i>{{ request.session.username }}
+                </span>
+                <a href="{% url 'auth_logout' %}" class="btn-signout">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══════════════════════════════
+         HERO
+    ══════════════════════════════ -->
+    <section class="about-hero">
+        <div class="container position-relative" style="z-index: 1;">
+            <div class="about-hero-badge">The Art of Mobility</div>
+            <h1 class="about-hero-title">
+                About Drive<span>Ease</span>
+            </h1>
+            <p class="about-hero-sub">
+                Redefining the luxury automotive rental experience through advanced digital procurement and an elite, hyper-curated fleet of world-class vehicles.
+            </p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         PHILOSOPHY + STATS
+    ══════════════════════════════ -->
+    <section class="about-philosophy">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+
+                <div class="col-lg-6 about-philosophy-text">
+                    <span class="about-eyebrow">Our Philosophy</span>
+                    <h2 class="about-section-title">Engineering the Perfect Journey</h2>
+                    <p>
+                        Founded with a vision to eliminate friction in high-end vehicle acquisition,
+                        <strong>DriveEase</strong> bridges the gap between sophisticated corporate
+                        logistics and automotive passion. We do not merely rent assets — we engineer
+                        a seamless transition from desire to destination.
+                    </p>
+                    <p>
+                        Every vehicle in our fleet undergoes meticulous mechanical vetting and
+                        aesthetic configuration, ensuring that your arrival is not just noticed,
+                        but remembered.
+                    </p>
+                    <p>
+                        We operate at the intersection of technology and luxury — where real-time
+                        digital systems meet the timeless pursuit of automotive excellence.
+                    </p>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="about-stats-grid">
+                        <div class="about-stat-box">
+                            <div class="about-stat-number">99%</div>
+                            <div class="about-stat-label">Client Satisfaction</div>
+                        </div>
+                        <div class="about-stat-box">
+                            <div class="about-stat-number">50+</div>
+                            <div class="about-stat-label">Premium Assets</div>
+                        </div>
+                        <div class="about-stat-box">
+                            <div class="about-stat-number">24/7</div>
+                            <div class="about-stat-label">Concierge Support</div>
+                        </div>
+                        <div class="about-stat-box">
+                            <div class="about-stat-number">0%</div>
+                            <div class="about-stat-label">Hidden Fees</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         TIMELINE
+    ══════════════════════════════ -->
+    <section class="about-timeline-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="about-eyebrow">Our Journey</span>
+                <h2 class="about-section-title">Milestones That Define Us</h2>
+                <p class="about-section-sub">From a bold idea to a premier luxury fleet platform</p>
+            </div>
+
+            <div class="about-timeline">
+                <div class="about-timeline-item">
+                    <div class="about-timeline-dot">01</div>
+                    <div>
+                        <div class="about-timeline-year">2021 — Foundation</div>
+                        <div class="about-timeline-title">DriveEase is Born</div>
+                        <div class="about-timeline-desc">
+                            Launched with a curated fleet of 10 premium vehicles and a mission to
+                            redefine automotive rental in the digital era.
+                        </div>
+                    </div>
+                </div>
+                <div class="about-timeline-item">
+                    <div class="about-timeline-dot">02</div>
+                    <div>
+                        <div class="about-timeline-year">2022 — Expansion</div>
+                        <div class="about-timeline-title">Fleet Doubles, Platform Evolves</div>
+                        <div class="about-timeline-desc">
+                            Expanded to 25+ vehicles across multiple luxury segments. Launched our
+                            proprietary real-time booking engine and instant confirmation system.
+                        </div>
+                    </div>
+                </div>
+                <div class="about-timeline-item">
+                    <div class="about-timeline-dot">03</div>
+                    <div>
+                        <div class="about-timeline-year">2023 — Innovation</div>
+                        <div class="about-timeline-title">Cryptographic Payment Security</div>
+                        <div class="about-timeline-desc">
+                            Integrated zero-wait booking confirmation and end-to-end encrypted
+                            payment processing into every transaction on the platform.
+                        </div>
+                    </div>
+                </div>
+                <div class="about-timeline-item">
+                    <div class="about-timeline-dot">04</div>
+                    <div>
+                        <div class="about-timeline-year">2024 — Today</div>
+                        <div class="about-timeline-title">50+ Premium Assets & Growing</div>
+                        <div class="about-timeline-desc">
+                            Serving elite clients with an ever-expanding fleet, 24/7 concierge
+                            support, bespoke delivery options, and absolute pricing transparency.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         WHY CHOOSE
+    ══════════════════════════════ -->
+    <section class="about-why-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="about-eyebrow">Why DriveEase</span>
+                <h2 class="about-section-title">The Pillars of Our Service</h2>
+                <p class="about-section-sub">Operational excellence built on six core principles</p>
+            </div>
+
+            <div class="about-why-grid">
+                <div class="about-why-card">
+                    <div class="about-why-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="about-why-title">Absolute Security</div>
+                    <p class="about-why-desc">
+                        Cryptographic payment gateways and fully covered executive insurance
+                        structures protect every mile of your journey.
+                    </p>
+                </div>
+                <div class="about-why-card">
+                    <div class="about-why-icon">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </div>
+                    <div class="about-why-title">Real-Time Fleet Sync</div>
+                    <p class="about-why-desc">
+                        The vehicle you book is the exact vehicle dispatched —
+                        no bait-and-switch, no substitutions, ever.
+                    </p>
+                </div>
+                <div class="about-why-card">
+                    <div class="about-why-icon">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div class="about-why-title">Bespoke Requests</div>
+                    <p class="about-why-desc">
+                        Chauffeurs, child seats, custom delivery — every logistical
+                        need handled without friction or additional complexity.
+                    </p>
+                </div>
+                <div class="about-why-card">
+                    <div class="about-why-icon">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <div class="about-why-title">Transparent Pricing</div>
+                    <p class="about-why-desc">
+                        What you see is what you pay. Zero hidden fees,
+                        zero surprises at checkout — guaranteed.
+                    </p>
+                </div>
+                <div class="about-why-card">
+                    <div class="about-why-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="about-why-title">24/7 Concierge</div>
+                    <p class="about-why-desc">
+                        Round-the-clock support from automotive specialists
+                        who understand and respect your standards.
+                    </p>
+                </div>
+                <div class="about-why-card">
+                    <div class="about-why-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="about-why-title">Vetted Fleet</div>
+                    <p class="about-why-desc">
+                        Every vehicle passes rigorous mechanical and aesthetic
+                        inspection before entering our premium catalog.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         PROCESS
+    ══════════════════════════════ -->
+    <section class="about-process-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="about-eyebrow">How It Works</span>
+                <h2 class="about-section-title">Four Steps to Your Destination</h2>
+                <p class="about-section-sub">Seamless from selection to departure</p>
+            </div>
+
+            <div class="about-process-steps">
+                <div class="about-step">
+                    <div class="about-step-num">1</div>
+                    <div class="about-step-title">Browse Fleet</div>
+                    <p class="about-step-desc">
+                        Filter our curated catalog by category, model, or daily rate to find your ideal vehicle.
+                    </p>
+                </div>
+                <div class="about-step">
+                    <div class="about-step-num">2</div>
+                    <div class="about-step-title">Configure Booking</div>
+                    <p class="about-step-desc">
+                        Set your dates, delivery location, and any special requirements in minutes.
+                    </p>
+                </div>
+                <div class="about-step">
+                    <div class="about-step-num">3</div>
+                    <div class="about-step-title">Secure Payment</div>
+                    <p class="about-step-desc">
+                        Complete payment through our encrypted gateway and receive instant confirmation.
+                    </p>
+                </div>
+                <div class="about-step">
+                    <div class="about-step-num">4</div>
+                    <div class="about-step-title">Vehicle Dispatched</div>
+                    <p class="about-step-desc">
+                        Your confirmed vehicle arrives at your specified location — on time, every time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         CTA
+    ══════════════════════════════ -->
+    <section class="about-cta-section">
+        <div class="container">
+            <div class="about-cta-box">
+                <div class="about-cta-title">Ready to Elevate Your Journey?</div>
+                <p class="about-cta-sub">
+                    Browse our premium fleet and secure your luxury vehicle today —
+                    instant confirmation, zero friction, absolute transparency.
+                </p>
+                <a href="{% url 'catalog' %}" class="btn-about-cta">
+                    Explore the Fleet <i class="fa-solid fa-arrow-right ms-2" style="font-size: 0.7rem;"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

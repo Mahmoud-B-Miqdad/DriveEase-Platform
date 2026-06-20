@@ -18,4 +18,6 @@ urlpatterns = [
 
     path('booking/payment/<int:booking_id>/', views.payment_gate, name='payment_gate'),
     path('booking/payment/process/<int:booking_id>/', views.process_payment_action, name='process_payment_action'),
+
+    path('about/', views.about_view, name='about'),
 ]

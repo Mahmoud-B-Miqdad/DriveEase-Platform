@@ -1965,6 +1965,255 @@ body.catalog-page {
     box-shadow: none;
 }
 
+/* ══════════════════════════════
+   MY RESERVATIONS PAGE
+══════════════════════════════ */
+
+/* ── Page Header ── */
+.reservations-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.btn-rent-another {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--gold);
+    color: var(--obsidian);
+    border: none;
+    border-radius: 10px;
+    padding: 9px 18px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-rent-another:hover {
+    background: var(--gold-light);
+    color: var(--obsidian);
+    transform: translateY(-1px);
+}
+
+/* ── Reservations Table ── */
+.reservations-table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.reservations-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+}
+
+.reservations-table thead tr {
+    background: var(--surface-raised);
+    border-bottom: 1px solid var(--border);
+}
+
+.reservations-table thead th {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 13px 16px;
+    white-space: nowrap;
+}
+
+.reservations-table thead th:first-child { padding-left: 24px; }
+.reservations-table thead th:last-child  { text-align: right; padding-right: 24px; }
+
+.reservations-table tbody tr {
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+    transition: background 0.2s;
+}
+
+.reservations-table tbody tr:last-child { border-bottom: none; }
+
+.reservations-table tbody tr:hover {
+    background: rgba(201, 168, 76, 0.025);
+}
+
+.reservations-table tbody td {
+    padding: 16px;
+}
+
+.reservations-table tbody td:first-child { padding-left: 24px; }
+.reservations-table tbody td:last-child  { text-align: right; padding-right: 24px; }
+
+/* Reservation ID */
+.res-id {
+    font-family: monospace;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+}
+
+/* Asset Cell */
+.res-car-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.res-car-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--gold);
+    flex-shrink: 0;
+}
+
+.res-car-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.res-car-year {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Date Cell */
+.res-date-from,
+.res-date-to {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.res-date-from { margin-bottom: 3px; }
+
+.res-date-from i,
+.res-date-to i {
+    color: var(--gold);
+    font-size: 0.6rem;
+}
+
+/* Amount */
+.res-amount {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+/* Status Badges */
+.res-badge-confirmed {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(201, 168, 76, 0.07);
+    border: 1px solid rgba(201, 168, 76, 0.22);
+    color: var(--gold);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.res-badge-pending {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(100, 140, 220, 0.07);
+    border: 1px solid rgba(100, 140, 220, 0.2);
+    color: #7a9fd4;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+/* Action Buttons */
+.btn-pay-now {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--obsidian);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-pay-now:hover {
+    background: var(--gold-light);
+    color: var(--obsidian);
+    transform: translateY(-1px);
+}
+
+.res-dispatched {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.68rem;
+    color: #6ec494;
+    font-weight: 600;
+}
+
+/* ── Empty State ── */
+.reservations-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-top: 1rem;
+}
+
+.reservations-empty-icon {
+    font-size: 2.5rem;
+    color: var(--border);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.reservations-empty-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.reservations-empty-sub {
+    font-size: 0.77rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
 @keyframes spin {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }

@@ -135,6 +135,20 @@ def create_booking_action(request, car_id):
         
     return redirect('catalog')
 
+def my_bookings_view(request):
+    """
+    Renders the custom customer dashboard containing personal fleet reservations.
+    """
+    if 'user_id' not in request.session:
+        return redirect('auth_index') 
+        
+    bookings = Booking.objects.filter(user_id=request.session['user_id']).order_by('-id')
+    
+    context = {
+        'bookings': bookings,
+    }
+    return render(request, 'my_bookings.html', context)
+
 def payment_gate(request, booking_id):
     """Route Protection: Displays the professional invoice and mock credit card form."""
     if 'user_id' not in request.session:

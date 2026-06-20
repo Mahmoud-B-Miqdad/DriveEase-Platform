@@ -11,6 +11,25 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# تحميل المتغيرات من ملف .env
+load_dotenv()
+
+# ── SendGrid SMTP Infrastructure Configuration ──
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+EMAIL_HOST_USER = 'apikey' 
+
+EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')  
+
+DEFAULT_FROM_EMAIL = 'mahmoud.b.miqdad@gmail.com'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -104,19 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# ── SendGrid SMTP Infrastructure Configuration ──
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-
-EMAIL_HOST_USER = 'apikey' 
-
-EMAIL_HOST_PASSWORD = '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'
- 
-DEFAULT_FROM_EMAIL = 'mahmoud.b.miqdad@gmail.com'
 
 
 # Internationalization

@@ -30,3 +30,6 @@ local_settings.py
 # --- OS temporary files ---
 .DS_Store
 Thumbs.db
+
+# Environments
+.env

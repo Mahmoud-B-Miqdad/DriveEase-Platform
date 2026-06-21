@@ -33,3 +33,5 @@ Thumbs.db
 
 # Environments
 .env
+
+media/

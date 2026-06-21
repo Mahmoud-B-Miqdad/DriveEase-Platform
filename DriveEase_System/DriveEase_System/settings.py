@@ -14,16 +14,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # تحميل المتغيرات ديناميكياً من ملف .env مع تحديد مساره لضمان القراءة الصحيحة
 load_dotenv(BASE_DIR / '.env')
 
-# ── SendGrid SMTP Infrastructure Configuration ──
+# ── Gmail SMTP Configuration ──
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = 'apikey' 
-EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')  
-DEFAULT_FROM_EMAIL = 'mahmoud.b.miqdad@gmail.com'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-nu0og#hw4*60=^qnvkt7dvv6#5pb6_d^hjeg-0#w+(fu8#z281')

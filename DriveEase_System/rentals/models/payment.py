@@ -10,7 +10,7 @@ class PaymentManager(models.Manager):
         Fat Model Behavior: 
         1. Generates an immutable database payment record (1:1 with Booking).
         2. Automatically upgrades booking status from Pending to Confirmed.
-        3. Dynamically compiles and dispatches the HTML invoice via SendGrid.
+        3. Dynamically compiles and dispatches the HTML invoice via Gmail SMTP.
         """
         payment = self.create(
             booking=booking,
@@ -39,9 +39,9 @@ class PaymentManager(models.Manager):
                 html_message=html_message,
                 fail_silently=False,  
             )
-            print("Successfully processed invoice payment and dispatched Email via SendGrid SMTP!")
+            print("Successfully processed invoice payment and dispatched Email via Gmail SMTP!")
         except Exception as e:
-            print(f"SendGrid SMTP delivery anomaly tracked: {e}")
+            print(f"Gmail SMTP delivery error: {e}")
             
         return payment
 

@@ -21,6 +21,28 @@
 The platform is built on **Fat Model** architecture, keeping business logic inside model managers rather than views, resulting in clean, maintainable, and scalable code.
 
 ---
+## 🖼️ Screenshots
+
+### 🔐 Authentication
+![Sign In](screenshots/sign_in.png)
+![Register](screenshots/register.png)
+
+### 🚗 Premium Fleet Catalog
+![Catalog](screenshots/catalog.png)
+
+### 🔍 Car Details
+![Car Details](screenshots/car-details.png)
+
+### 📅 Booking & Live Invoice
+![Booking](screenshots/booking.png)
+
+### 💳 Payment Gate
+![Payment](screenshots/payment.png)
+
+### 📋 My Bookings Dashboard
+![My Bookings](screenshots/my-bookings.png)
+
+---
 
 ## 🖼️ Pages & Features
 

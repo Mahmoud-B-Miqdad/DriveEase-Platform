@@ -42,6 +42,9 @@ The platform is built on **Fat Model** architecture, keeping business logic insi
 ### 📋 My Bookings Dashboard
 ![My Bookings](screenshots/my-bookings.png)
 
+### 📧 Automated Invoice Email
+![Invoice Email](screenshots/invoice-email.png)
+
 ---
 
 ## 🖼️ Pages & Features
